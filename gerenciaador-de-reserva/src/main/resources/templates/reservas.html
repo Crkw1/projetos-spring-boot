@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reservas</title>
+
+    <link
+            th:rel="stylesheet"
+            th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "
+    />
+</head>
+<body>
+<div>
+    <div th:insert="fragmentos/nav :: nav"></div>
+    <div
+            class="container"
+            style="padding-top: 10vh; display: flex; flex-direction: column; align-items: center;"
+    >
+        <h3>Welcome <span th:text=" ${session.user.getFullName()}"></span></h3>
+        <br />
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Reserva</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reserva : ${session.user.getReservas()}">
+                <td th:text="${reserva.getAmenityTipo()}"></td>
+                <td th:text="${reserva.getReservaDate()}"></td>
+                <td th:text="${reserva.getStartTime()}"></td>
+                <td th:text="${reserva.getEndTime()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#createReservationModal"
+        >
+            Create Reservation
+        </button>
+
+        <!-- Modal -->
+        <div
+                th:insert="fragmentos/modal :: modal"
+                th:with="reserva=${reserva}"
+        ></div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</body>
+</html>

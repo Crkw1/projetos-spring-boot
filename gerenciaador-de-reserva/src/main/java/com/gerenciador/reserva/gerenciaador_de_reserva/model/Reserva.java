@@ -1,23 +1,16 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.domain;
+package com.gerenciador.reserva.gerenciaador_de_reserva.model;
 
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
 
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter
@@ -37,13 +30,16 @@ public class Reserva {
     )
     private Long id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private LocalDate reservaDate;
 
-    @Column(nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
+    @Column
     private LocalTime startTime;
 
-    @Column(nullable = false)
+    @DateTimeFormat(pattern = "HH:mm")
+    @Column
     private LocalTime endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -56,6 +52,10 @@ public class Reserva {
     @Column(nullable = false)
     private OffsetDateTime lastUpdated;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private AmenityTipo amenityTipo;
+
     @PrePersist
     public void prePersist() {
         dateCreated = OffsetDateTime.now();
@@ -67,4 +67,13 @@ public class Reserva {
         lastUpdated = OffsetDateTime.now();
     }
 
+
+    public Reserva(LocalDate reservaDate, LocalTime startTime,
+                       LocalTime endTime, User user, AmenityTipo amenityTipo) {
+        this.reservaDate = reservaDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.user = user;
+        this.amenityTipo = amenityTipo;
+    }
 }
