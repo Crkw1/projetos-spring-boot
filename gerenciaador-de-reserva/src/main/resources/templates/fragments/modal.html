@@ -1,18 +1,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-<div
-        class="modal fade"
-        th:fragment="modal"
-        id="createReservaModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="createReservaModalTitle"
-        aria-hidden="true"
->
+<div class="modal fade" th:fragment="modal" id="criarReservaModal" tabindex="-1" role="dialog" aria-labelledby="criarReservaModalTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createReservaModalTitle">
+                <h5 class="modal-title" id="criarReservaModalTitle">
                     Criar Reserva
                 </h5>
                 <button
@@ -26,10 +18,7 @@
             </div>
 
             <div class="modal-body">
-                <form
-                        action="#"
-                        th:action="@{/reservas-submit}"
-                        th:object="${reserva}"
+                <form action="#" th:action="@{/reservas-submit}" th:object="${reserva}"
                         method="post"
                 >
                     <div class="form-group row">
@@ -40,11 +29,13 @@
                             <select
                                     class="form-control"
                                     id="type-select"
-                                    th:field="*{amenityType}"
+                                    th:field="*{amenityTipo}"
                             >
                                 <option value="POOL">POOL</option>
                                 <option value="SAUNA">SAUNA</option>
-                                <option value="GYM">GYM</option>
+                                <option value="CONDIMINIO">CONDIMINIO</option>
+                                <option value="SALA">SALA</option>
+                                <option value="ACADEMIA">ACADEMIA</option>
                             </select>
                         </div>
                     </div>
@@ -58,10 +49,10 @@
                                     type="date"
                                     id="start-date"
                                     name="trip-start"
-                                    th:field="*{reservationDate}"
-                                    value="2018-07-22"
-                                    min="2021-05-01"
-                                    max="2021-12-31"
+                                    th:field="*{reservaDate}"
+                                    value="2022-01-01"
+                                    min="2022-01-01"
+                                    max="2023-12-31"
                             />
                         </div>
                     </div>
@@ -95,7 +86,7 @@
                                     max="20:00"
                                     required
                             />
-                            <small>Amenities are available from 8 am to 8 pm</small>
+                            <small>Marcacao disponivel de 8:00 da manha as 20:00 da noite</small>
                         </div>
                     </div>
                     <div class="modal-footer">

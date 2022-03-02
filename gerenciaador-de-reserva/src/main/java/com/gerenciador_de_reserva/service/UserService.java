@@ -1,7 +1,8 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.service;
+package com.gerenciador_de_reserva.service;
 
-import com.gerenciador.reserva.gerenciaador_de_reserva.model.User;
-import com.gerenciador.reserva.gerenciaador_de_reserva.repos.UserRepository;
+import com.gerenciador_de_reserva.model.User;
+import com.gerenciador_de_reserva.model.Reserva;
+import com.gerenciador_de_reserva.repos.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,12 +28,16 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
     public Long create(final User user) {
         return userRepository.save(user).getId();
     }
 
     public void update(final Long id, final User user) {
-        final User existinUser = userRepository.findById(id)
+        final User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         userRepository.save(user);
     }
@@ -41,7 +46,5 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public org.springframework.security.core.userdetails.User getUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
-    }
 }
+

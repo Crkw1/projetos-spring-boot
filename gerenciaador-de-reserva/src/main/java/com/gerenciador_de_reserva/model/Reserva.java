@@ -1,4 +1,4 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.model;
+package com.gerenciador_de_reserva.model;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +14,8 @@ import java.time.OffsetDateTime;
 @Entity
 @Getter
 @Setter
+@Table
+
 public class Reserva {
 
     @Id
@@ -42,7 +44,7 @@ public class Reserva {
     @Column
     private LocalTime endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

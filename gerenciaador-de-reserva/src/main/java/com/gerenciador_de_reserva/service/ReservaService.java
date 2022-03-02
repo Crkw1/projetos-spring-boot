@@ -1,14 +1,16 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.service;
+package com.gerenciador_de_reserva.service;
 
-import com.gerenciador.reserva.gerenciaador_de_reserva.exception.CapacidadeFullException;
-import com.gerenciador.reserva.gerenciaador_de_reserva.model.Reserva;
-import com.gerenciador.reserva.gerenciaador_de_reserva.repos.CapacidadeRepository;
-import com.gerenciador.reserva.gerenciaador_de_reserva.repos.ReservaRepository;
+import com.gerenciador_de_reserva.exception.CapacidadeFullException;
+import com.gerenciador_de_reserva.model.Reserva;
+import com.gerenciador_de_reserva.model.Capacidade;
+import com.gerenciador_de_reserva.repos.CapacidadeRepository;
+import com.gerenciador_de_reserva.repos.ReservaRepository;
+import com.gerenciador_de_reserva.repos.UserRepository;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
 
 
 @Service
@@ -34,23 +36,21 @@ public class ReservaService {
 
     public Long create(final Reserva reserva) {
         int capacidade = capacidadeRepository.findByAmenityTipo(reserva.getAmenityTipo()).getCapacidade();
-        int overlappingReservas;
-        overlappingReservas = reservaRepository
-                .findReservasByReservaDateAndStartTimeBeforeAndEndTimeAfterOrStartTimeBetween (
+        int overlappingReservas = reservaRepository
+                .findReservasByReservaDateAndStartTimeBeforeAndEndTimeAfterOrStartTimeBetween(
                         reserva.getReservaDate(),
                         reserva.getStartTime(), reserva.getEndTime(),
-                        reserva.getStartTime(), reserva.getEndTime());
+                        reserva.getStartTime(), reserva.getEndTime()).size();
 
         if (overlappingReservas >= capacidade) {
-            throw new CapacidadeFullException("\n" +
-                    "A capacidade desta comodidade está cheia no momento desejado");
+            throw new CapacidadeFullException("A capacidade desta comodidade está cheia no momento desejado");
         }
 
         return reservaRepository.save(reserva).getId();
     }
 
     public void update(final Long id, final Reserva reserva) {
-        final Reserva existinReserva = reservaRepository.findById(id)
+        final Reserva existingReserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         reservaRepository.save(reserva);
     }

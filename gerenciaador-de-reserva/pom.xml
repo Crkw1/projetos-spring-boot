@@ -8,10 +8,10 @@
         <version>2.6.4</version>
         <relativePath /><!-- lookup parent from repository -->
     </parent>
-    <groupId>com.gerenciador.reserva</groupId>
+    <groupId>com</groupId>
     <artifactId>gerenciaador-de-reserva</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gerenciaador-de-reserva</name>
+    <name>gerenciador-de-reserva</name>
 
     <properties>
         <java.version>17</java.version>
@@ -47,7 +47,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.22</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,6 +65,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+       <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
             <version>3.0.4.RELEASE</version>

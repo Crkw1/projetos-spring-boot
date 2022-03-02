@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: ${JDBC_DATABASE_URL:jdbc:h2:mem:gerenciaador-de-reserva}
+    url: ${JDBC_DATABASE_URL:jdbc:h2:mem:gerenciador-de-reserva}
     username: ${JDBC_DATABASE_USERNAME:sa}
     password: ${JDBC_DATABASE_PASSWORD:}
   dbcp2:
     max-wait-millis: 30000
-    validation-query: SELECT 1
+    validation-query: "SELECT 1"
     validation-query-timeout: 30
   jpa:
     hibernate:

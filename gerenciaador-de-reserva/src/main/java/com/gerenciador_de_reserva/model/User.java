@@ -1,4 +1,4 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.model;
+package com.gerenciador_de_reserva.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,7 +42,7 @@ public class User {
     private String passwordHash;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Reserva> reserva = new HashSet<>();
+    private Set<Reserva> reservas = new HashSet<>();
 
     @Column(nullable = false, updatable = false)
     private OffsetDateTime dateCreated;

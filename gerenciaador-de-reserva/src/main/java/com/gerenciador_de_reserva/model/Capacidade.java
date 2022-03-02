@@ -1,4 +1,4 @@
-package com.gerenciador.reserva.gerenciaador_de_reserva.model;
+package com.gerenciador_de_reserva.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class Capacidade {
     @Column(nullable = false)
     private int capacidade;
 
-    public Capacidade(AmenityTipo amenityTipo, int capacity) {
+    public Capacidade(AmenityTipo amenityTipo, int capacidade) {
         this.amenityTipo = amenityTipo;
         this.capacidade = capacidade;
     }
