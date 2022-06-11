@@ -1,3 +1,3 @@
 # projetos-spring-boot
 
-PROJETOS UTILIZANDO SPRING BOOT, juntamente com suas funcionalidades. 
+Projetos usando SPRING BOOT, juntamente com suas funcionalidades pra aprendizado. 
